@@ -14,7 +14,7 @@ device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
 img_size = 128
 batch_size = 32
-num_epochs = 10
+num_epochs = 100
 
 # Transforms
 transform = transforms.Compose([
@@ -23,7 +23,7 @@ transform = transforms.Compose([
 ])
 
 # Load datasets
-train_data = datasets.ImageFolder("dataset/", transform=transform)
+train_data = datasets.ImageFolder("/Users/nathanaelseay/Documents/DL/training_data/", transform=transform)
 train_size = int(0.8 * len(train_data))
 val_size = len(train_data) - train_size
 train_dataset, val_dataset = torch.utils.data.random_split(train_data, [train_size, val_size])
