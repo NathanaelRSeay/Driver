@@ -41,14 +41,16 @@ class BinaryCNN(nn.Module):
             nn.Conv2d(64, 128, 3, padding=1), nn.ReLU(), nn.MaxPool2d(2),
             nn.Flatten(),
             nn.Linear(128 * (img_size//8) * (img_size//8), 64), nn.ReLU(),
-            nn.Linear(64, 1), nn.Sigmoid()  # Binary classification
+            nn.Linear(64, 1),
+            # Binary classification
+
         )
 
     def forward(self, x):
         return self.model(x)
 
 model = BinaryCNN().to(device)
-criterion = nn.BCELoss()
+criterion  = nn.BCEWithLogitsLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
