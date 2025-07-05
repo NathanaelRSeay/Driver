@@ -25,7 +25,7 @@ for count in range(2000):
     name = '/Users/nathanaelseay/Documents/DL/training_data/clean/DL_clean_image' + str(count) + '.jpg'
     rotated_pil_clean.save(name)
 
-# for count in range(Marks.__len__()):
+
 
 
 
