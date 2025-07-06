@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from LoadDriverMind import save_model, load_model
 
 
-best_val_acc=0.01
+
 
 device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
@@ -17,7 +17,9 @@ device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
 img_size = 128
 batch_size = 32
-num_epochs = 10
+num_epochs = 100
+best_val_acc=0.01
+
 
 # Transforms
 transform = transforms.Compose([
