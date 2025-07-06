@@ -52,6 +52,7 @@ class BinaryCNN(nn.Module):
 model = BinaryCNN().to(device)
 criterion  = nn.BCEWithLogitsLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
 
 # Training loop
 train_acc_history, val_acc_history = [], []
@@ -87,6 +88,7 @@ for epoch in range(num_epochs):
             total += labels.size(0)
     val_acc = correct / total
     val_acc_history.append(val_acc)
+    scheduler.step()
 
     print(f"Epoch {epoch+1}: Train Acc={train_acc:.4f}, Val Acc={val_acc:.4f}")
 
