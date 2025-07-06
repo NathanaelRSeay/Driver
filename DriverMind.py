@@ -7,6 +7,18 @@ from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
+best_val_acc=0.01
+def save_model(model, optimizer, epoch, loss, path="checkpoint.pth"):
+    """
+    Save model and optimizer state to a file.
+    """
+    torch.save({
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'loss': loss
+    }, path)
+    print(f"✅ Model saved to: {path}")
 
 device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
@@ -14,7 +26,7 @@ device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
 img_size = 128
 batch_size = 32
-num_epochs = 100
+num_epochs = 10
 
 # Transforms
 transform = transforms.Compose([
@@ -91,6 +103,9 @@ for epoch in range(num_epochs):
     scheduler.step()
 
     print(f"Epoch {epoch+1}: Train Acc={train_acc:.4f}, Val Acc={val_acc:.4f}")
+    if val_acc > best_val_acc:
+        best_val_acc = val_acc
+        save_model(model, optimizer, epoch + 1, loss, path="best_model.pth")
 
 # Plot results
 plt.plot(train_acc_history, label='Train Acc')
@@ -100,14 +115,5 @@ plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
 
-def save_model(model, optimizer, epoch, loss, path="checkpoint.pth"):
-    """
-    Save model and optimizer state to a file.
-    """
-    torch.save({
-        'epoch': epoch,
-        'model_state_dict': model.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict(),
-        'loss': loss
-    }, path)
-    print(f"✅ Model saved to: {path}")
+
+
