@@ -1,11 +1,18 @@
 
 import torch
-import torch.nn as nn
-import torch.optim as optim
-from torchvision import datasets, transforms, models
-from torch.utils.data import DataLoader
-import matplotlib.pyplot as plt
 
+
+def save_model(model, optimizer, epoch, loss, path="checkpoint.pth"):
+    """
+    Save model and optimizer state to a file.
+    """
+    torch.save({
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'loss': loss
+    }, path)
+    print(f"✅ Model saved to: {path}")
 
 def load_model(model, optimizer, path="checkpoint.pth", device='cpu'):
     """

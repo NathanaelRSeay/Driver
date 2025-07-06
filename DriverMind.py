@@ -6,19 +6,10 @@ import torch.optim as optim
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
+from LoadDriverMind import save_model, load_model
+
 
 best_val_acc=0.01
-def save_model(model, optimizer, epoch, loss, path="checkpoint.pth"):
-    """
-    Save model and optimizer state to a file.
-    """
-    torch.save({
-        'epoch': epoch,
-        'model_state_dict': model.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict(),
-        'loss': loss
-    }, path)
-    print(f"✅ Model saved to: {path}")
 
 device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
 
