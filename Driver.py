@@ -9,7 +9,7 @@ img_pil = Image.open("/Users/nathanaelseay/Documents/DL/Driver.png")
 # Mark image
 Marks = []
 
-for count in range(2000):
+for count in range(3500):
 
     Mark, Mark_pil= Mk.MarkFUNC(img_pil) # Marking function
     Marks.append(Mark)
@@ -19,7 +19,7 @@ for count in range(2000):
     Marked_rotated_pil.save(name)
 # Rotate image:
 
-for count in range(2000):
+for count in range(3500):
 
     rotated_clean, rotated_pil_clean= Rt.RotateFUNC(img_pil) # Rotation function
     name = '/Users/nathanaelseay/Documents/DL/training_data/clean/DL_clean_image' + str(count) + '.jpg'

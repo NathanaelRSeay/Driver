@@ -99,3 +99,15 @@ plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
+
+def save_model(model, optimizer, epoch, loss, path="checkpoint.pth"):
+    """
+    Save model and optimizer state to a file.
+    """
+    torch.save({
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'loss': loss
+    }, path)
+    print(f"✅ Model saved to: {path}")
