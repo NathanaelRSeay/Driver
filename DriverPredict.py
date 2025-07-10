@@ -51,7 +51,7 @@ transform = transforms.Compose([
 ])
 
 # Step 3: Load and preprocess your image
-img_path = "/Users/nathanaelseay/Documents/DL/training_data/clean/DL_clean_image21.jpg"
+img_path = "/Users/nathanaelseay/Documents/DL/training_data/marked/DL_marked_image5.jpg"
 image = Image.open(img_path).convert("RGB")
 input_tensor = transform(image).unsqueeze(0)  # shape: [1, 3, 128, 128]
 
